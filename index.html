@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="operatieCtrl">
+  <input type="number" ng-model="first">
+  <select type="text" ng-model="op">
+  	<option value="+">+</option>
+    <option value="-">-</option>
+    <option value="/">/</option>
+    <option value="*">*</option>
+  </select>
+  <input type="number" ng-model="second">
+  <br><br>
+  Rezultat = {{rezultat()}}
+  <br><br>
+  
+  <p>Fara NG-Repeat =  {{ getNumber() }} </p>
+  
+  
+  <p ng-repeat=" x in [1,2,3,4,5,6,7,8,9] "> {{x*x}} </p>
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+
+app.controller('operatieCtrl', function($scope) {
+  $scope.first;
+  $scope.second;
+  $scope.op;
+  
+  
+  
+  $scope.rezultat = function(){
+  if($scope.op=="+"){
+    return $scope.first + $scope.second;}
+    
+  else if($scope.op=="-"){
+    return $scope.first - $scope.second;}
+    
+  else if($scope.op=="*"){
+    return $scope.first * $scope.second;}
+    
+  else if($scope.op=="/"){
+    return $scope.first / $scope.second;}
+  };
+   
+   
+      $scope.getNumber = function() {
+      var total = 1;
+          for(var i = 1; i <= 9; i++ ){
+          	total *= i
+          }
+          return total;
+      }
+});
+
+</script>
+
+
+</body>
+</html>
