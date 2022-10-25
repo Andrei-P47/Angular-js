@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<style>
+
+table, tr, th,td {border: 1px solid;}
+th,td {padding: 5px;}
+
+</style>
+
+<body>
+
+<div ng-app="myApp" ng-controller="namesCtrl">
+
+  <p><input type="text" ng-model="search"></p>
+
+  <ul>
+    <li ng-repeat="x in students | filter:search">
+      {{ x.nume + ', ' + x.prenume + ', ' + x.nota }}
+    </li>
+  </ul>
+  
+  
+  <br>
+  <hr>
+  <br>
+  
+  <p> {{ servicePow }} </p>
+  
+  <br>
+  <hr>
+  <br>
+  
+  
+  <select>
+  	<option ng-repeat=" x in students">
+    	{{ x.nume + ', ' + x.prenume + ', ' + x.nota }}
+    </option>
+  </select>
+  
+  <br>
+  <hr>
+  <br>
+  
+  <table>
+  	<tr>
+      <th>Nume</th>
+      <th>Prenume</th>
+      <th>Nota</th>
+    </tr>
+    <tr ng-repeat=" x in students | orderBy:'-nota'">
+      <td>{{ x.nume }}</td>
+      <td>{{ x.prenume }}</td>
+      <td>{{ x.nota }}</td>
+    </tr>
+  </table>
+  
+  
+  <br>
+  <hr>
+  <br>
+  
+  
+  <input type="number" ng-model="first">
+  <input type="number" ng-model="second">
+  
+  <p ng-click="getNumber()">Rezultat: {{rezultat}} </p>
+  <p> {{faraRest}} </p>
+
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+
+app.controller('namesCtrl', function($scope) {
+    $scope.students = [
+          {nume:'Akin',prenume:'Cristina',nota:'5'},
+          {nume:'Bostan',prenume:'Marius',nota:'6'},
+          {nume:'Bostan',prenume:'Cristian',nota:'7'},
+          {nume:'Botnari',prenume:'Ion',nota:'8'},
+          {nume:'Cupcea',prenume:'Petru',nota:'9'},        
+          {nume:'Gaburici',prenume:'Ion',nota:'9'},        
+          {nume:'Groian',prenume:'Lidia',nota:'9'},
+          {nume:'Gandea',prenume:'Cristian',nota:'8'},
+          {nume:'Garbur',prenume:'Mirela',nota:'7'},
+          {nume:'Gutu',prenume:'Andrei',nota:'6'},        
+          {nume:'Pavalache',prenume:'Alina',nota:'5'},        
+          {nume:'Batir',prenume:'Victor',nota:'6'},
+          {nume:'Moraru',prenume:'Valeria',nota:'7'},
+          {nume:'Prisacari',prenume:'Andrei',nota:'8'},
+          {nume:'Sitari',prenume:'Vlada',nota:'9'},
+          {nume:'Shpatacovschi',prenume:'Oleg',nota:'9'},
+          {nume:'Timbalist',prenume:'Catalin',nota:'9'},
+        ];
+        
+        
+        
+
+        
+        
+        
+  	
+     	$scope.first;
+  		$scope.second;
+        $scope.rezultat;
+        $scope.faraRest = false;
+
+        $scope.getNumber = function() {
+      		$scope.rezultat = $scope.first + $scope.second;
+            
+            if($scope.first % $scope.second == 0){
+        		$scope.faraRest = true
+            } else {$scope.faraRest = false}
+            
+      }
+});
+
+
+app.service('nota', function() {
+    this.myFunc = function (x) {
+        return Math.pow(x, 2);
+    }
+});
+
+
+ $scope.orderByMe = function(x) {
+    $scope.myOrderBy = x;
+  }
+</script>
+
+
+</body>
+</html>
